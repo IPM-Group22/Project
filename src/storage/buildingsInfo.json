@@ -1,0 +1,499 @@
+{
+  "ii": {
+    "image": "building_ii.png",
+    "numberOfFloors": 2,
+    "floors": [
+      {
+        "floor": 1,
+        "floorImage": "building_ii_floor_1.png",
+        "rooms": [
+          {
+            "name": "127",
+            "size": "75",
+            "description": "This room has chairs",
+            "photos": [
+              "https://images.pexels.com/photos/356065/pexels-photo-356065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://plus.unsplash.com/premium_photo-1680807869780-e0876a6f3cd5?q=80&w=3871&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "https://www.teachhub.com/wp-content/uploads/2020/05/Classroom-Management-for-an-Effective-Learning-Environment-1024x683.jpg",
+              "https://images.pexels.com/photos/2675061/pexels-photo-2675061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            ],
+            "type": [
+              "classroom",
+              "auditorium"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 75,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 7,
+                "description": "This room has tables"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Air conditioning",
+              "Natural light"
+            ],
+            "reservations": [
+              {
+                "date": "2024-11-19",
+                "time_start": "09:00",
+                "time_end": "11:00",
+                "user": "user1",
+                "description": "This is a test reservation"
+              },
+              {
+                "date": "2024-11-19",
+                "time_start": "14:00",
+                "time_end": "16:00",
+                "user": "user2",
+                "description": "This is a test reservation"
+              },
+              
+              {
+                "date": "2024-11-18",
+                "time_start": "14:00",
+                "time_end": "16:00",
+                "user": "user2",
+                "description": "This is a test reservation"
+              }
+            ]
+          },
+          {
+            "name": "128",
+            "size": "100",
+            "type": [
+              "classroom",
+              "auditorium"
+            ],
+            "photos": [
+              "https://images.unsplash.com/photo-1611078481295-536d46b3c51d",
+              "https://images.unsplash.com/photo-1519985176271-adb1088fa94c"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 75,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 7,
+                "description": "This room has tables"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Air conditioning",
+              "Natural light"
+            ]
+          },
+          {
+            "name": "114",
+            "size": "80",
+            "type": [
+              "classroom"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 80,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Whiteboard",
+                "number": 1,
+                "description": "This room has a whiteboard"
+              }
+            ],
+            "qualities": [
+              "Natural light"
+            ]
+          },
+          {
+            "name": "115",
+            "size": "90",
+            "type": [
+              "computer lab"
+            ],
+            "materials": [
+              {
+                "name": "Computers",
+                "number": 20,
+                "description": "This room has computers"
+              },
+              {
+                "name": "Chairs",
+                "number": 20,
+                "description": "This room has chairs"
+              }
+            ],
+            "qualities": [
+              "Air conditioning"
+            ]
+          },
+          {
+            "name": "116",
+            "size": "70",
+            "type": [
+              "seminar room"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 50,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 10,
+                "description": "This room has tables"
+              }
+            ],
+            "qualities": [
+              "Projector",
+              "Soundproof walls"
+            ]
+          },
+          {
+            "name": "117",
+            "size": "60",
+            "type": [
+              "meeting room"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 20,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Table",
+                "number": 1,
+                "description": "This room has a large table"
+              }
+            ],
+            "qualities": [
+              "Natural light"
+            ]
+          },
+          {
+            "name": "118",
+            "size": "85",
+            "type": [
+              "lecture hall"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 85,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Microphone",
+                "number": 2,
+                "description": "This room has microphones"
+              }
+            ],
+            "qualities": [
+              "Air conditioning",
+              "Audio system"
+            ]
+          },
+          {
+            "name": "119",
+            "size": "50",
+            "type": [
+              "classroom"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 50,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Whiteboard",
+                "number": 1,
+                "description": "This room has a whiteboard"
+              }
+            ],
+            "qualities": [
+              "Natural light"
+            ]
+          },
+          {
+            "name": "120",
+            "size": "65",
+            "type": [
+              "workshop room"
+            ],
+            "materials": [
+              {
+                "name": "Workbenches",
+                "number": 5,
+                "description": "This room has workbenches"
+              },
+              {
+                "name": "Tools",
+                "number": 30,
+                "description": "This room has tools"
+              }
+            ],
+            "qualities": [
+              "Ventilation system"
+            ]
+          },
+          {
+            "name": "121",
+            "size": "90",
+            "type": [
+              "classroom"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 90,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 20,
+                "description": "This room has tables"
+              }
+            ],
+            "qualities": [
+              "Air conditioning"
+            ]
+          },
+          {
+            "name": "122",
+            "size": "55",
+            "type": [
+              "seminar room"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 55,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Soundproof walls"
+            ]
+          },
+          {
+            "name": "123",
+            "size": "100",
+            "type": [
+              "auditorium"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 100,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Stage",
+                "number": 1,
+                "description": "This room has a stage"
+              }
+            ],
+            "qualities": [
+              "Audio system",
+              "Lighting system"
+            ]
+          },
+          {
+            "name": "124",
+            "size": "110",
+            "type": [
+              "classroom"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 110,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 20,
+                "description": "This room has tables"
+              }
+            ],
+            "qualities": [
+              "Air conditioning"
+            ]
+          },
+          {
+            "name": "125",
+            "size": "95",
+            "type": [
+              "conference room"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 30,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Table",
+                "number": 1,
+                "description": "This room has a large table"
+              },
+              {
+                "name": "Television",
+                "number": 1,
+                "description": "This room has a television for presentations"
+              }
+            ],
+            "qualities": [
+              "Video conferencing equipment"
+            ]
+          },
+          {
+            "name": "126",
+            "size": "75",
+            "type": [
+              "classroom"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 75,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Air conditioning"
+            ]
+          }
+        ]
+      },
+      {
+        "floor": 2,
+        "floorImage": "building_ii_floor_2.png",
+        "rooms": [
+          {
+            "name": "227",
+            "size": "75",
+            "type": [
+              "classroom",
+              "auditorium"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 75,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 7,
+                "description": "This room has tables"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Air conditioning",
+              "Natural light"
+            ]
+          },
+          {
+            "name": "220",
+            "size": "85",
+            "type": [
+              "computer lab"
+            ],
+            "materials": [
+              {
+                "name": "Computers",
+                "number": 30,
+                "description": "This room has computers"
+              },
+              {
+                "name": "Chairs",
+                "number": 30,
+                "description": "This room has chairs"
+              }
+            ],
+            "qualities": [
+              "Air conditioning",
+              "Natural light"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "vii": {
+    "image": "building_vii.png",
+    "numberOfFloors": 3,
+    "floors": [
+      {
+        "floor": 0,
+        "floorImage": "building_vii_floor_0.png",
+        "rooms": [
+          {
+            "name": "1C",
+            "size": "120",
+            "type": [
+              "classroom",
+              "auditorium"
+            ],
+            "materials": [
+              {
+                "name": "Chairs",
+                "number": 120,
+                "description": "This room has chairs"
+              },
+              {
+                "name": "Tables",
+                "number": 30,
+                "description": "This room has tables"
+              },
+              {
+                "name": "Projector",
+                "number": 1,
+                "description": "This room has a projector"
+              }
+            ],
+            "qualities": [
+              "Air conditioning"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

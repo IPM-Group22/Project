@@ -1,0 +1,60 @@
+{
+  "en": {
+    "roomInfo": {
+      "building": "Building",
+      "room": "Room",
+      "buttonBack": "Back",
+      "buttonRoomInfo": "Room Info",
+      "buttonReservations": "Reservations",
+      "Description": "Description",
+      "Size": "Size",
+      "Quality": "Quality",
+      "calendarLocale": "en",
+      "completedReservations": "Completed Reservations",
+      "date": "Date",
+      "timeStart": "Start Time",
+      "timeEnd": "End Time",
+      "bookYourSlot": "Book Your Slot",
+      "alertCheck1": "You must define a date, a start time and an end time",
+      "alertCheck2": "The start time must be before the end time",
+      "alertCheck3": "The date must be in the future",
+      "alertCheck4": "The room is already booked for that time",
+      "alertSuccess": "The room was successfully booked for the selected time",
+      "buttonBook": "Book",
+      "noReservations": "No reservations for the selected date"
+    },
+    "home": {
+      "building": "Building",
+      "room": "Room"
+    }
+  },
+  "pt": {
+    "roomInfo": {
+      "building": "Edificio",
+      "room": "Sala",
+      "buttonBack": "Atrás",
+      "buttonRoomInfo": "Informação da Sala",
+      "buttonReservations": "Reservas",
+      "Description": "Descrição",
+      "Size": "Tamanho",
+      "Quality": "Qualidade",
+      "calendarLocale": "pt-PT",
+      "completedReservations": "Reservas Completas",
+      "date": "Data",
+      "timeStart": "Hora de Início",
+      "timeEnd": "Hora de Fim",
+      "bookYourSlot": "Reserva a tua sala",
+      "alertCheck1": "Deves definir uma data, uma hora de início e uma hora de fim",
+      "alertCheck2": "A hora de início deve ser antes da hora de fim",
+      "alertCheck3": "A data deve ser no futuro",
+      "alertCheck4": "A sala já está reservada para esse horário",
+      "alertSuccess": "A sala foi reservada com sucesso para o horário selecionado",
+      "buttonBook": "Reservar",
+      "noReservations": "Sem reservas para a data selecionada"
+    },
+    "home": {
+      "building": "Building",
+      "room": "Room"
+    }
+  }
+}
