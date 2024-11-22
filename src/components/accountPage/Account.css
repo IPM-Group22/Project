@@ -52,3 +52,57 @@ body {
     padding: 20px;
     background-color: #f9f9f9;
 }
+
+.user-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .user-details-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease;
+  }
+  
+  .user-details-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .user-details-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .user-details-grid {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .user-detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .detail-value {
+    color: #333;
+    font-weight: 400;
+  }

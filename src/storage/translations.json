@@ -26,6 +26,49 @@
     "home": {
       "building": "Building",
       "room": "Room"
+    }, 
+    "account":{
+      "selectOptionFromTheSidebar": "Select an option from the sidebar",
+      "accountPage": "Account Page",
+      "aboutUser": "About User",
+      "reservations": "Reservations",
+      "back": "Back",
+      "logout": "Logout",
+      "userProfile": "User Profile",
+      "name": "Name",
+      "userReservations": "'s Reservations",
+      "messageNoReservations": "You have no reservations",
+      "logoutMessage": "You will logout",
+      "notLoggedIn": "You are not logged in",
+      "building": "Building",
+      "room": "Room",
+      "date": "Date",
+      "time": "Time"
+    },
+    "loginAndRegister":{
+      "usernameOrUsername": "Username or Email",
+      "notAMember": "Not a member? ",
+      "signupNow": "Signup now",
+      "name": "Name",
+      "repeatPassword": "Repeat Password",
+      "signUp": "Sign Up",
+      "alreadyAMember": "Already a member?",
+      "loginNow": "Login now",
+      "register": "Register",
+      "loginSuccessful": "Login successful",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "incorrectUsernameOrPassword": "Incorrect username or password",
+      "usernameOrEmailAlreadyExists": "Username or email already exists",
+      "registrationSuccessful": "Registration successful",
+      "userRegistered": "User registered"
+    },
+    "buildings":{
+      "buildingName": "Building Name",
+      "building": "Building",
+      "floor": "Floor",
+      "numberOfFloors": "Number of Floors",
+      "imageNotFound": "Image not found",
+      "buildingNotFound": "Building not found"
     }
   },
   "pt": {
@@ -55,6 +98,48 @@
     "home": {
       "building": "Building",
       "room": "Room"
-    }
+    },
+    "account":{
+      "selectOptionFromTheSidebar": "Selecione uma opção na barra lateral",
+      "accountPage": "Página da Conta",
+      "aboutUser": "Sobre o Utilizador",
+      "reservations": "Reservas",
+      "back": "Atrás",
+      "logout": "Sair",
+      "userProfile": "Perfil do Utilizador",
+      "name": "Nome",
+      "userReservations": " Reservas",
+      "messageNoReservations": "Não tem reservas",
+      "logoutMessage": "Vai sair",
+      "notLoggedIn": "Não está logado",
+      "building": "Building",
+      "room": "Room",
+      "date": "Date",
+      "time": "Time"
+    },
+    "loginAndRegister":{
+      "usernameOrUsername": "Username ou Email",
+      "notAMember": "Não és membro?",
+      "signupNow": "Registar agora",
+      "name": "Nome",
+      "repeatPassword": "Repete a Password",
+      "signUp": "Registar",
+      "alreadyAMember": "Já és membro?",
+      "loginNow": "Login agora",
+      "register": "Registo",
+      "loginSuccessful": "Login bem sucedido",
+      "passwordsDoNotMatch": "As passwords não são iguais",
+      "incorrectUsernameOrPassword": "Username ou password incorretos",
+      "usernameOrEmailAlreadyExists": "Username ou email já existem",
+      "registrationSuccessful": "Registo bem sucedido",
+      "userRegistered": "User registered"
+    },
+    "building":{
+      "buildingName": "Nome do Edificio",
+      "building": "Edificio",
+      "floor": "Piso",
+      "numberOfFloors": "Número de Pisos",
+      "imageNotFound": "Imagem não encontrada",
+      "buildingNotFound": "Edificio não encontrado"
   }
-}
+}}

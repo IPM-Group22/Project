@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import buildingsInfo from '../../storage/buildingsInfo.json';
+import './Building.css';
+import FloatingButton from '../sharedComponents/FloatingButton';
+import LoginRegisterPopup from '../sharedComponents/LoginRegisterPopup';
+import translations from '../../storage/translations.json';
+import languageJson from '../../storage/language.json';
+
+
+
+let language = languageJson['language'];
+let translation = translations[language].building;
 
 const Building = () => {
     const { buildingName } = useParams<{ buildingName: string }>();
     const navigate = useNavigate();
     const building = buildingsInfo[buildingName];
     const [selectedFloor, setSelectedFloor] = useState(0);
+    const [isAccountOpen, setIsAccountOpen] = useState(false);
+    const toggleAccount = () => {
+        setIsAccountOpen(!isAccountOpen);
+    };
 
     if (!building) {
-        return <div>Building not found</div>;
+        return <div>{translation.buildingNotFound}</div>;
     }
 
     return (
-        <div>
-            <button onClick={() => navigate(-1)}>Back</button>
-            <h1>{buildingName.toUpperCase()} Building</h1>
-            <img src={building.image} alt={`Building ${buildingName}`} />
-            <p>Number of Floors: {building.numberOfFloors}</p>
+        <div className="container">
+            <FloatingButton onClick={() => navigate(-1)} type={"back"} />
+            <FloatingButton onClick={toggleAccount} type={"account"} />
+            {isAccountOpen ? <LoginRegisterPopup onClose={toggleAccount} /> : <></>}
+            <h1 className="building-title">{translation.building}: {buildingName.toUpperCase()}</h1>
+            <img className="building-image" src={building.image} alt={`${translation.building} ${buildingName} ${translation.imageNotFound}`} />
+            <p className='building-info'>{translation.numberOfFloors}: {building.numberOfFloors}</p>
 
             {/* Horizontal List for Floors */}
             <div className="floor-selector">
@@ -27,7 +43,7 @@ const Building = () => {
                         className={selectedFloor === index ? 'selected' : ''}
                         onClick={() => setSelectedFloor(index)}
                     >
-                        Floor {index + 1}
+                        {translation.floor} {index + 1}
                     </button>
                 ))}
             </div>

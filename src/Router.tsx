@@ -1,14 +1,15 @@
 import {
-    createBrowserRouter, Outlet, RouterProvider,
+    createBrowserRouter, Outlet, RouterProvider, HashRouter, createHashRouter
 } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Home from "./components/home/Home";
 import Building from "./components/buildingPage/Building";
 import RoomInfo from "./components/roomInfo/RoomInfo";
 import Error from "./components/error/Error";
-import Account from './components/accountPage/Account';
+import SearchResults from "./components/searchResults/SearchResults";
+import Account from "./components/accountPage/Account";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         "path": "/",
         children: [
@@ -25,17 +26,20 @@ const router = createBrowserRouter([
                 "element": <RoomInfo />,
             },
             {
-                "path": "*",
-                "element": <Error />,
+                "path": "/search",
+                "element": <SearchResults />,
             },
             {
-                "path": "/account",
+                "path": "/my-account",
                 "element": <Account />,
+            },
+            {
+                "path": "*",
+                "element": <Error />,
             }
         ]
     },
 ])
-
 
 export function Router() {
     return (

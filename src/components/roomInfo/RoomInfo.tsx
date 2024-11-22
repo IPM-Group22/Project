@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import "react-multi-carousel/lib/styles.css";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import buildingsInfo from '../../storage/buildingsInfo.json';
 import translations from '../../storage/translations.json';
 import './RoomInfo.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { getUser } from "../../session/session.js";
+import languageJson from '../../storage/language.json';
 
-const language = "en";
+
+
+const language = languageJson['language'];
 
 let valueSelected: String = '';
 let roomIndex: number = 0;
@@ -36,12 +39,10 @@ const responsive = {
 const RoomInfo = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState(translations[language].roomInfo.buttonRoomInfo);
     const { buildingName, roomName } = useParams<{ buildingName: string; roomName: string }>();
     const building = buildingsInfo[buildingName];
     const [roomInfo] = buildingsInfo[buildingName];
-
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
     const findFloorIndex = (buildingName: string, roomName: string): number | null => {
@@ -64,7 +65,32 @@ const RoomInfo = () => {
         console.log('Room not found in the building');
         return null;
     };
-    console.log('RoomInfo', buildingName, roomName, findFloorIndex(buildingName, roomName));
+
+    const [currentIndex, setCurrentIndex] = useState(findFloorIndex(buildingName, roomName));
+
+    const findRoomIndex = (buildingName: string, roomName: string): number | null => {
+        const building = buildingsInfo[buildingName];
+        if (!building) {
+            console.log('Building not found');
+            return null;
+        }
+
+        for (let floorIndex = 0; floorIndex < building.floors.length; floorIndex++) {
+            const floor = building.floors[floorIndex];
+            for (let roomIndex = 0; roomIndex < floor.rooms.length; roomIndex++) {
+                const room = floor.rooms[roomIndex];
+                if (room.name === roomName) {
+                    return roomIndex;
+                }
+            }
+        }
+
+        console.log('Room not found in the building');
+        return null;
+    };
+
+    roomIndex = findRoomIndex(buildingName, roomName);
+    console.log('RoomInfo', buildingName, roomName, findFloorIndex(buildingName, roomName), findRoomIndex(buildingName, roomName));
 
     let functionBook = () => {
         const timeStartInput = document.getElementById("timeStart") as HTMLInputElement;
@@ -100,9 +126,9 @@ const RoomInfo = () => {
                 }
             }
 
-            const reservation = { date: valueSelected, time_start: timeStart, time_end: timeEnd, user: "user_test" };
+            const reservation = { date: valueSelected, time_start: timeStart, time_end: timeEnd, user: getUser().username };
             buildingsInfo[buildingName].floors[currentIndex].rooms[roomIndex]['reservations'].push(reservation);
-            
+            console.log('Reservation added', reservation);
             alert(translations[language].roomInfo.alertSuccess);
         }
         else {

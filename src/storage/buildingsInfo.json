@@ -54,15 +54,14 @@
                 "date": "2024-11-19",
                 "time_start": "14:00",
                 "time_end": "16:00",
-                "user": "user2",
+                "user": "admin",
                 "description": "This is a test reservation"
               },
-              
               {
                 "date": "2024-11-18",
                 "time_start": "14:00",
                 "time_end": "16:00",
-                "user": "user2",
+                "user": "admin",
                 "description": "This is a test reservation"
               }
             ]
@@ -70,6 +69,7 @@
           {
             "name": "128",
             "size": "100",
+            "description": "",
             "type": [
               "classroom",
               "auditorium"
@@ -98,11 +98,14 @@
             "qualities": [
               "Air conditioning",
               "Natural light"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "114",
             "size": "80",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom"
             ],
@@ -120,11 +123,27 @@
             ],
             "qualities": [
               "Natural light"
-            ]
+            ],
+            "reservations": [{
+              "date": "2024-11-19",
+              "time_start": "14:00",
+              "time_end": "16:00",
+              "user": "admin",
+              "description": "This is a test reservation"
+            },
+            {
+              "date": "2024-11-18",
+              "time_start": "14:00",
+              "time_end": "16:00",
+              "user": "admin",
+              "description": "This is a test reservation"
+            }]
           },
           {
             "name": "115",
             "size": "90",
+            "description": "",
+            "photos": [],
             "type": [
               "computer lab"
             ],
@@ -142,11 +161,14 @@
             ],
             "qualities": [
               "Air conditioning"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "116",
             "size": "70",
+            "description": "",
+            "photos": [],
             "type": [
               "seminar room"
             ],
@@ -165,11 +187,27 @@
             "qualities": [
               "Projector",
               "Soundproof walls"
-            ]
+            ],
+            "reservations": [{
+              "date": "2024-11-19",
+              "time_start": "14:00",
+              "time_end": "16:00",
+              "user": "admin",
+              "description": "This is a test reservation"
+            },
+            {
+              "date": "2024-11-18",
+              "time_start": "14:00",
+              "time_end": "16:00",
+              "user": "admin",
+              "description": "This is a test reservation"
+            }]
           },
           {
             "name": "117",
             "size": "60",
+            "description": "",
+            "photos": [],
             "type": [
               "meeting room"
             ],
@@ -187,11 +225,14 @@
             ],
             "qualities": [
               "Natural light"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "118",
             "size": "85",
+            "description": "",
+            "photos": [],
             "type": [
               "lecture hall"
             ],
@@ -210,11 +251,14 @@
             "qualities": [
               "Air conditioning",
               "Audio system"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "119",
             "size": "50",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom"
             ],
@@ -232,11 +276,14 @@
             ],
             "qualities": [
               "Natural light"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "120",
             "size": "65",
+            "description": "",
+            "photos": [],
             "type": [
               "workshop room"
             ],
@@ -254,11 +301,14 @@
             ],
             "qualities": [
               "Ventilation system"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "121",
             "size": "90",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom"
             ],
@@ -276,11 +326,14 @@
             ],
             "qualities": [
               "Air conditioning"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "122",
             "size": "55",
+            "description": "",
+            "photos": [],
             "type": [
               "seminar room"
             ],
@@ -298,11 +351,14 @@
             ],
             "qualities": [
               "Soundproof walls"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "123",
             "size": "100",
+            "description": "",
+            "photos": [],
             "type": [
               "auditorium"
             ],
@@ -321,11 +377,14 @@
             "qualities": [
               "Audio system",
               "Lighting system"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "124",
             "size": "110",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom"
             ],
@@ -343,11 +402,14 @@
             ],
             "qualities": [
               "Air conditioning"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "125",
             "size": "95",
+            "description": "",
+            "photos": [],
             "type": [
               "conference room"
             ],
@@ -370,11 +432,14 @@
             ],
             "qualities": [
               "Video conferencing equipment"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "126",
             "size": "75",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom"
             ],
@@ -392,7 +457,8 @@
             ],
             "qualities": [
               "Air conditioning"
-            ]
+            ],
+            "reservations": []
           }
         ]
       },
@@ -403,6 +469,8 @@
           {
             "name": "227",
             "size": "75",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom",
               "auditorium"
@@ -427,11 +495,14 @@
             "qualities": [
               "Air conditioning",
               "Natural light"
-            ]
+            ],
+            "reservations": []
           },
           {
             "name": "220",
             "size": "85",
+            "description": "",
+            "photos": [],
             "type": [
               "computer lab"
             ],
@@ -450,7 +521,8 @@
             "qualities": [
               "Air conditioning",
               "Natural light"
-            ]
+            ],
+            "reservations": []
           }
         ]
       }
@@ -467,6 +539,8 @@
           {
             "name": "1C",
             "size": "120",
+            "description": "",
+            "photos": [],
             "type": [
               "classroom",
               "auditorium"
@@ -490,7 +564,8 @@
             ],
             "qualities": [
               "Air conditioning"
-            ]
+            ],
+            "reservations": []
           }
         ]
       }

@@ -1,12 +1,12 @@
 {
   "name": "js-react",
   "version": "1.0.0",
-  "homepage":"http://ipm-group22.github.io/Project",
+  "homepage": "http://ipm-group22.github.io/Project",
   "description": "",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
-	"predeploy":"npm run build",
-	"deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack serve"
@@ -16,7 +16,9 @@
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/react": "^18.2.37",
+    "@types/react-calendar": "^4.1.0",
     "@types/react-dom": "^18.2.15",
+    "@types/react-leaflet": "^3.0.0",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
     "gh-pages": "^6.2.0",
@@ -32,19 +34,18 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
+    "@types/leaflet": "^1.9.14",
     "@vis.gl/react-google-maps": "^1.0.2",
-    "babel-loader": "^9.2.1",
+    "common": "^0.2.5",
     "firebase": "^10.12.2",
-    "framer-motion": "^11.11.17",
     "gapi-script": "^1.2.0",
+    "leaflet": "^1.9.4",
     "node": "^21.2.0",
     "playwright": "^1.40.1",
     "react-calendar": "^5.1.0",
-    "react-multi-carousel": "^2.8.5",
-    "react-native": "^0.76.2",
-    "react-native-arrow": "^1.0.5",
+    "react-leaflet": "^4.2.1",
+    "react-native": "^0.76.3",
     "react-native-calendars": "^1.1307.0",
-    "react-native-paper": "^5.12.5",
     "react-router-dom": "^6.28.0",
     "reactjs-popup": "^2.0.6"
   }

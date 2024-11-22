@@ -24,11 +24,6 @@ module.exports = {
                     },
                 ],
             },
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
-            }
         ],
     }, 
 
@@ -41,6 +36,6 @@ module.exports = {
             }
         },
         port: 9000,
-        static: path.resolve(__dirname, 'dist')
+        static: path.resolve(__dirname, 'dist'),
     },
 };
