@@ -4,13 +4,8 @@ import buildingsInfo from '../../storage/buildingsInfo.json';
 import './Building.css';
 import FloatingButton from '../sharedComponents/FloatingButton';
 import LoginRegisterPopup from '../sharedComponents/LoginRegisterPopup';
+import { getUserLanguage, setUserLanguage } from "../../session/session.js";
 import translations from '../../storage/translations.json';
-import languageJson from '../../storage/language.json';
-
-
-
-let language = languageJson['language'];
-let translation = translations[language].building;
 
 const Building = () => {
     const { buildingName } = useParams<{ buildingName: string }>();
@@ -18,22 +13,29 @@ const Building = () => {
     const building = buildingsInfo[buildingName];
     const [selectedFloor, setSelectedFloor] = useState(0);
     const [isAccountOpen, setIsAccountOpen] = useState(false);
+
     const toggleAccount = () => {
         setIsAccountOpen(!isAccountOpen);
     };
 
+    const language = getUserLanguage();
+
+    
+
     if (!building) {
-        return <div>{translation.buildingNotFound}</div>;
+        return <div>Building not found</div>;
     }
 
     return (
         <div className="container">
             <FloatingButton onClick={() => navigate(-1)} type={"back"} />
             <FloatingButton onClick={toggleAccount} type={"account"} />
+            <FloatingButton onClick={() => {setUserLanguage(); window.location.reload();
+            }} type={"language"} />
             {isAccountOpen ? <LoginRegisterPopup onClose={toggleAccount} /> : <></>}
-            <h1 className="building-title">{translation.building}: {buildingName.toUpperCase()}</h1>
-            <img className="building-image" src={building.image} alt={`${translation.building} ${buildingName} ${translation.imageNotFound}`} />
-            <p className='building-info'>{translation.numberOfFloors}: {building.numberOfFloors}</p>
+            <h1 className="building-title">Building: {buildingName.toUpperCase()}</h1>
+            <img className="building-image" src={building.image} alt={`Building ${buildingName} Image Not Found`} />
+            <p className='building-info'>Number of Floors: {building.numberOfFloors}</p>
 
             {/* Horizontal List for Floors */}
             <div className="floor-selector">
@@ -43,7 +45,7 @@ const Building = () => {
                         className={selectedFloor === index ? 'selected' : ''}
                         onClick={() => setSelectedFloor(index)}
                     >
-                        {translation.floor} {index + 1}
+                        Floor {index + 1}
                     </button>
                 ))}
             </div>

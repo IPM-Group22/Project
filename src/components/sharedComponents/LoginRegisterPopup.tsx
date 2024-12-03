@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./LoginRegisterPopup.css";
-import { login, setUserSession, clearUserSession, userExists } from "../../session/session.js";
+import { login, setUserSession, clearUserSession, userExists, getUserLanguage, setUserLanguage } from "../../session/session.js";
 import AccountPopup from "./AccountPopup";
 import translations from '../../storage/translations.json';
-import languageJson from '../../storage/language.json';
 
 
-let language = languageJson['language'];
+let language = getUserLanguage();
 let translation = translations[language].loginAndRegister;
+let translationAccount = translations[language].account;
 
 
 const LoginRegisterPopup = ({ onClose }) => {
@@ -37,10 +37,12 @@ const LoginRegisterPopup = ({ onClose }) => {
         const success = login(usernameLogin, passwordLogin);
         if(success){
             setMessage(translation.loginSuccessful);
+            alert(translation.loginSuccessful);
             onClose();
         } else {
             console.log(translation.incorrectUsernameOrPassword);
             setMessage(translation.incorrectUsernameOrPassword);
+            alert(translation.incorrectUsernameOrPassword);
         };
     };
 
@@ -48,12 +50,14 @@ const LoginRegisterPopup = ({ onClose }) => {
         e.preventDefault();
         if(passwordRegister !== repeatPasswordRegister){
             setMessage(translation.passwordsDoNotMatch);
+            alert(translation.passwordsDoNotMatch);
             return;
         }
         const userAlreadyExists = userExists(usernameRegister, emailRegister);
         if (userAlreadyExists) {
             console.log(translation.usernameOrEmailAlreadyExists);
             setMessage(translation.usernameOrEmailAlreadyExists);
+            alert(translation.usernameOrEmailAlreadyExists);
         } else {
             console.log(translation.userRegistered);
             const newUser = { 
@@ -69,7 +73,9 @@ const LoginRegisterPopup = ({ onClose }) => {
     };
 
     const onLogout = () => {
-        clearUserSession();
+        if (window.confirm(translationAccount.confirmLogout)) {
+            clearUserSession();
+        }
         onClose();
     };
 
@@ -145,7 +151,16 @@ const LoginRegisterPopup = ({ onClose }) => {
                             </span>
                         </div>
                         <div className="field">
-                            <input placeholder="Email" type="text" className="input" value={emailRegister} onChange={(e) => setEmailRegister(e.target.value)} required/>
+                            <input 
+                                placeholder="Email" 
+                                type="email" 
+                                className="input" 
+                                value={emailRegister} 
+                                onChange={(e) => setEmailRegister(e.target.value)} 
+                                required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                title="Please enter a valid email address"
+                            />
                             <span className="span">
                                 <svg className="" xmlSpace="preserve" style={{ background: "new 0 0 512 512" }} viewBox="0 0 512 512" y="0" x="0" height="20" width="50" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                     <g><path className="" data-original="#000000" fill="#595959" d="M256 0c-74.439 0-135 60.561-135 135s60.561 135 135 135 135-60.561 135-135S330.439 0 256 0zM423.966 358.195C387.006 320.667 338.009 300 286 300h-60c-52.008 0-101.006 20.667-137.966 58.195C51.255 395.539 31 444.833 31 497c0 8.284 6.716 15 15 15h420c8.284 0 15-6.716 15-15 0-52.167-20.255-101.461-57.034-138.805z"></path></g>

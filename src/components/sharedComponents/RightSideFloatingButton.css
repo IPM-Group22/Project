@@ -1,13 +1,12 @@
-/* RightSideFloatingButton.css */
 .right-side-floating-button {
     position: fixed;
-    top: 20px;               /* Adjust as needed for vertical position */
-    right: 20px;             /* Position on the right side */
+    top: 20px;
+    right: 20px;
     width: 65px;
     height: 65px;
     padding: 0;
     border-radius: 50%;
-    background-color: #007bff; /* Adjust color as needed */
+    background-color: #007bff;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

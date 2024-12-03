@@ -5,14 +5,12 @@ import translations from '../../storage/translations.json';
 import './RoomInfo.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getUser } from "../../session/session.js";
-import languageJson from '../../storage/language.json';
+import FloatingButton from '../sharedComponents/FloatingButton';
+import LoginRegisterPopup from '../sharedComponents/LoginRegisterPopup';
+import { getUser, isLoggedIn, getUserLanguage, setUserLanguage } from "../../session/session.js";
 
+const language = getUserLanguage();
 
-
-const language = languageJson['language'];
-
-let valueSelected: String = '';
 let roomIndex: number = 0;
 
 const responsive = {
@@ -43,7 +41,14 @@ const RoomInfo = () => {
     const { buildingName, roomName } = useParams<{ buildingName: string; roomName: string }>();
     const building = buildingsInfo[buildingName];
     const [roomInfo] = buildingsInfo[buildingName];
+    const [isAccountOpen, setIsAccountOpen] = useState(false);
+    const [selectedButton, setSelectedButton] = useState(translations[language].roomInfo.buttonRoomInfo);
+
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
+
+    const toggleAccount = () => {
+        setIsAccountOpen(!isAccountOpen);
+    };
 
     const findFloorIndex = (buildingName: string, roomName: string): number | null => {
         const building = buildingsInfo[buildingName];
@@ -96,79 +101,59 @@ const RoomInfo = () => {
         const timeStartInput = document.getElementById("timeStart") as HTMLInputElement;
         const timeEndInput = document.getElementById("timeEnd") as HTMLInputElement;
             
-        if (!timeStartInput.value || !timeEndInput.value || valueSelected === '') {
+        if (!timeStartInput.value || !timeEndInput.value || selectedDate === '') {
             alert(translations[language].roomInfo.alertCheck1);
+            return;
         }
     
-        else if (timeStartInput.value >= timeEndInput.value) {
+        if (timeStartInput.value >= timeEndInput.value) {
             alert(translations[language].roomInfo.alertCheck2);
+            return;
         }
-        else if (selectedDate < new Date().toISOString().split('T')[0]) {
-            alert(translations[language].roomInfo.alertCheck3);
-        }
-        else if (timeStartInput && timeEndInput) {
-            const timeStart = timeStartInput.value;
-            const timeEnd = timeEndInput.value;
 
-            // Check for time conflicts with existing reservations
-            const room = building.floors[currentIndex].rooms.find(room => room.name === roomName);
-            if (room) {
-                const hasConflict = room.reservations.some(reservation => {
-                    return reservation.date === valueSelected &&
-                        ((timeStart >= reservation.time_start && timeStart < reservation.time_end) ||
-                        (timeEnd > reservation.time_start && timeEnd <= reservation.time_end) ||
-                        (timeStart <= reservation.time_start && timeEnd >= reservation.time_end));
-                });
-        
-                if (hasConflict) {
-                    alert(translations[language].roomInfo.alertCheck4);
-                    return;
-                }
+        if (selectedDate < new Date().toISOString().split('T')[0]) {
+            alert(translations[language].roomInfo.alertCheck3);
+            return;
+        }
+
+        const room = building.floors[currentIndex].rooms.find(room => room.name === roomName);
+        if (room) {
+            const hasConflict = room.reservations.some(reservation => {
+                return reservation.date === selectedDate &&
+                    ((timeStartInput.value >= reservation.time_start && timeStartInput.value < reservation.time_end) ||
+                     (timeEndInput.value > reservation.time_start && timeEndInput.value <= reservation.time_end) ||
+                     (timeStartInput.value <= reservation.time_start && timeEndInput.value >= reservation.time_end));
+            });
+
+            if (hasConflict) {
+                alert(translations[language].roomInfo.alertCheck4);
+                return;
             }
 
-            const reservation = { date: valueSelected, time_start: timeStart, time_end: timeEnd, user: getUser().username };
-            buildingsInfo[buildingName].floors[currentIndex].rooms[roomIndex]['reservations'].push(reservation);
+            const reservation = { id: Math.floor(Math.random()*100), date: selectedDate, time_start: timeStartInput.value, time_end: timeEndInput.value, user: getUser().username };
+            building.floors[currentIndex].rooms[roomIndex].reservations.push(reservation);
             console.log('Reservation added', reservation);
             alert(translations[language].roomInfo.alertSuccess);
         }
-        else {
-        console.log('Input elements not found');
-    }
-        
     }
 
-    const handleSelect = (index: number) => {
-        setCurrentIndex(index);
-    };
-
-    const RoomCalendar = () => {
+    const RoomCalendar = ({ selectedDate, setSelectedDate }: { selectedDate: string; setSelectedDate: React.Dispatch<React.SetStateAction<string>> }) => {
         const [value, onChange] = useState(new Date());
-        const [activeStartDate, setActiveStartDate] = useState(new Date());
 
-        
         const handleDateChange = (value: Date) => {
             onChange(value);
             setSelectedDate(value.toISOString().split('T')[0]);
-            valueSelected = value.toISOString().split('T')[0];
-            setActiveStartDate(value);
         };
-
-        const handleActiveStartDateChange = ({ activeStartDate }: { activeStartDate: Date }) => {
-            setActiveStartDate(activeStartDate);
-        };
-
         return (
             <Calendar
                 onChange={handleDateChange}
-                value={value}
+                value={selectedDate}
                 minDate={new Date('2024-09-01')}
                 maxDate={new Date('2024-12-31')}
                 showNavigation={true}
                 showNeighboringMonth={true}
                 showWeekNumbers={false}
                 locale={translations[language].roomInfo.calendarLocale}
-                activeStartDate={activeStartDate}
-                onActiveStartDateChange={handleActiveStartDateChange}
             />
         )
     }
@@ -200,19 +185,32 @@ const RoomInfo = () => {
 
                                                         {room.materials.map((material, index) => {
                                                             return (
-                                                                <tr key={index}>
-                                                                    <td>Material - {index + 1}</td>
-                                                                    <td>{material.name}</td>
-                                                                </tr>
+                                                                index == 0 ? (
+                                                                    <tr key={index}>
+                                                                        <td>Material</td>
+                                                                        <td>{material.number}x {material.name}</td>
+                                                                    </tr>
+                                                                ): (
+                                                                    <tr key={index}>
+                                                                        <td></td>
+                                                                        <td>{material.number}x {material.name}</td>
+                                                                    </tr>
+                                                                )
+                                                                
                                                             );
                                                         })}
 
                                                         {room.qualities.map((qlt, index) => {
                                                             return (
-                                                                <tr key={index}>
-                                                                    <td>{translations[language].roomInfo.Quality} - {index + 1}</td>
+                                                                index == 0 ? (<tr key={index}>
+                                                                    <td>{translations[language].roomInfo.Quality}</td>
                                                                     <td>{qlt}</td>
-                                                                </tr>
+                                                                    </tr>
+                                                                ) : (<tr key={index}>
+                                                                    <td></td>
+                                                                        <td>{qlt}</td>
+                                                                    </tr>
+                                                                )
                                                             );
                                                         })}
 
@@ -233,56 +231,62 @@ const RoomInfo = () => {
             case translations[language].roomInfo.buttonReservations:
                 return building.floors[currentIndex].rooms.map((room, index) => {
                     if (room.name === roomName) {
-                        const reservationsForSelectedDate = room.reservations.filter(reserve => reserve.date === valueSelected);
+                        const reservationsForSelectedDate = room.reservations.filter(reserve => reserve.date === selectedDate);
                         return (
                             <div key={index}>
                                 <div className="reservations-container">
                                     <div className="calendar-container">
-                                        <h2><RoomCalendar /></h2>
+                                        <h2><RoomCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate}/></h2>
                                     </div>
                                     <div className="details-container">
-                                        <h2>{translations[language].roomInfo.completedReservations}</h2>
+                                        <h2>{translations[language].roomInfo.reservations}</h2>
                                         {reservationsForSelectedDate.length > 0 ? (
+                                            <><p>{translations[language].roomInfo.reservationsForDate}</p>
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <th>{translations[language].roomInfo.date}</th>
                                                         <th>{translations[language].roomInfo.timeStart}</th>
                                                         <th>{translations[language].roomInfo.timeEnd}</th>
                                                     </tr>
                                                     {reservationsForSelectedDate.map((reserve, index) => (
                                                         <tr key={index}>
-                                                            <td>{reserve.date}</td>
                                                             <td>{reserve.time_start}</td>
                                                             <td>{reserve.time_end}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
-                                            </table>
+                                            </table></>
                                         ) : (
                                             <p>{translations[language].roomInfo.noReservations}</p>
                                         )}
                                     </div>
-                                    <div className="details-container book-slot-container">
-                                        <h2>{translations[language].roomInfo.bookYourSlot}</h2>
-                                        <div className="book-slot">
-                                            <div className="book-slot-row">
-                                                <label>{translations[language].roomInfo.date}</label>
-                                                <span>{valueSelected}</span>
-                                            </div>
-                                            <div className="book-slot-row">
-                                                <label>{translations[language].roomInfo.timeStart}</label>
-                                                <input type="time" id="timeStart" name="timeStart" />
-                                            </div>
-                                            <div className="book-slot-row">
-                                                <label>{translations[language].roomInfo.timeEnd}</label>
-                                                <input type="time" id="timeEnd" name="timeEnd" />
-                                            </div>
-                                            <div className="book-button-container">
-                                                <button className="book-button" onClick={() => functionBook()}>{translations[language].roomInfo.buttonBook}</button>
+                                    {isLoggedIn() ? (
+                                        <div className="details-container book-slot-container">
+                                            <h2>{translations[language].roomInfo.bookYourSlot}</h2>
+                                            <div className="book-slot">
+                                                <div className="book-slot-row">
+                                                    <label>{translations[language].roomInfo.date}</label>
+                                                    <span>{selectedDate}</span>
+                                                </div>
+                                                <div className="book-slot-row">
+                                                    <label>{translations[language].roomInfo.timeStart}</label>
+                                                    <input type="time" id="timeStart" name="timeStart" />
+                                                </div>
+                                                <div className="book-slot-row">
+                                                    <label>{translations[language].roomInfo.timeEnd}</label>
+                                                    <input type="time" id="timeEnd" name="timeEnd" />
+                                                </div>
+                                                <div className="book-button-container">
+                                                    <button className="book-button" onClick={() => functionBook()}>{translations[language].roomInfo.buttonBook}</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    ) : (
+                                        <div className="details-container book-slot-container">
+                                            <h2>{translations[language].roomInfo.bookYourSlot}</h2>
+                                            <p>{translations[language].roomInfo.ifYouWantToBook}</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         );
@@ -295,26 +299,38 @@ const RoomInfo = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', background: 'steelblue' }}>
+        <>
+        <FloatingButton onClick={() => navigate(-1)} type={"back"} />
+        <FloatingButton onClick={toggleAccount} type={"account"} />
+        <FloatingButton onClick={() => {setUserLanguage(); window.location.reload();
+        }} type={"language"} />
+        {isAccountOpen ? <LoginRegisterPopup onClose={toggleAccount} /> : <></>}
+        <div className={"centered-container"}><h1>{translations[language].roomInfo.building} {buildingName.toUpperCase()} {translations[language].roomInfo.room} {roomName}</h1></div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ flex: 1, alignContent: 'center', background: 'skyblue' }}>
-                    <button className={'back-button'} onClick={() => navigate(-1)}>{translations[language].roomInfo.buttonBack}</button>
-                </div>
-                <div style={{ flex: 4, background: 'skyblue' }}>
-                    <div className={"centered-container"}><h1>{translations[language].roomInfo.building} {buildingName} {translations[language].roomInfo.room} {roomName}</h1></div>
-                </div>
-                <div style={{ flex: 1, background: 'skyblue' }}>
+                <div style={{ flex: 1}}>
                     <div className={"header"}><h1></h1></div>
                 </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ flex: 1 }}></div>
-                <div style={{ flex: 2 }}>
-                    <button className="buttons" onClick={() => setSelectedOption(translations[language].roomInfo.buttonRoomInfo)}>{translations[language].roomInfo.buttonRoomInfo}</button>
-                </div>
-                <div style={{ flex: 2 }}>
-                    <button className="buttons" onClick={() => setSelectedOption(translations[language].roomInfo.buttonReservations)}>{translations[language].roomInfo.buttonReservations}</button>
-                </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <button
+                    className={`buttons ${selectedButton === translations[language].roomInfo.buttonRoomInfo ? 'selected' : ''}`}
+                    onClick={() => {
+                        setSelectedOption(translations[language].roomInfo.buttonRoomInfo);
+                        setSelectedButton(translations[language].roomInfo.buttonRoomInfo);
+                    }}
+                >
+                    {translations[language].roomInfo.buttonRoomInfo}
+                </button>
+                <button
+                    className={`buttons ${selectedButton === translations[language].roomInfo.buttonReservations ? 'selected' : ''}`}
+                    onClick={() => {
+                        setSelectedOption(translations[language].roomInfo.buttonReservations);
+                        setSelectedButton(translations[language].roomInfo.buttonReservations);
+                    }}
+                >
+                    {translations[language].roomInfo.buttonReservations}
+                </button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {renderContent()}
@@ -323,6 +339,7 @@ const RoomInfo = () => {
 
             </div>
         </div>
+        </>
     );
 };
 

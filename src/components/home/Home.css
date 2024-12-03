@@ -65,3 +65,21 @@ body, html {
     opacity: 0;
   }
 }
+
+
+.map-header {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 8px;
+  font-size: 18px;
+  z-index: 900;
+}
+
+.login-register-popup {
+  z-index: 1100;
+}

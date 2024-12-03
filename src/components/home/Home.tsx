@@ -5,16 +5,14 @@ import 'leaflet/dist/leaflet.css';
 import './Home.css';
 import Drawer from '../sharedComponents/Drawer';
 import LoginRegisterPopup from '../sharedComponents/LoginRegisterPopup';
+import Filters from '../sharedComponents/Filters';
 import { useNavigate } from 'react-router-dom';
 import FloatingButton from '../sharedComponents/FloatingButton';
 import L from 'leaflet';
+import { getUserLanguage, setUserLanguage } from "../../session/session.js";
 import translations from '../../storage/translations.json';
 
-import languageJson from '../../storage/language.json';
-
-let language = languageJson['language'];
-
-const center: LatLngTuple = [38.660917187755416, -9.206071341318228];
+const center: LatLngTuple = [38.66149464690209, -9.205871106395124];
 
 const teardropIcon = L.icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // Example teardrop icon
@@ -36,18 +34,19 @@ const buildings = [
     id: 'ii',
     coordinates: [
       [38.661196212074714, -9.204052213323157],
-      [38.66156192170195, -9.203390243292466],
+      [38.661578032727064, -9.203434592416215],
       [38.66112924162508, -9.202901279163182],
       [38.66071305205716, -9.203522053938856],
     ] as LatLngTuple[],
     entrances: [
-      [38.6614, -9.2039],
-      [38.6613, -9.2041],
+      [38.66151114872347, -9.203478057524197],
+      [38.660792855736894, -9.203567407361135],
+      [38.66123638240376, -9.20400828555248],
     ] as LatLngTuple[], // Entrance locations
     rooms: [
-      { name: 'Room 201', location: [38.6613, -9.2035] as LatLngTuple},
-      { name: 'Room 202', location: [38.6614, -9.2036] as LatLngTuple },
-      { name: 'Room 203', location: [38.6615, -9.2037] as LatLngTuple},
+      { name: 'Room 124', location: [38.66138789664035, -9.203338278195364] as LatLngTuple},
+      { name: 'Room 125', location: [38.661056481631626, -9.203265705787098] as LatLngTuple },
+      { name: 'Room 126', location: [38.66104089641529, -9.20366209158845] as LatLngTuple},
     ],
   },
   {
@@ -62,8 +61,8 @@ const buildings = [
       [38.661899125692514, -9.208382464565645],
     ] as LatLngTuple[],
     entrances: [
-      [38.6625, -9.2078],
-      [38.6618, -9.2076],
+      [38.66250351686014, -9.207457036670432],
+      [38.66225056228438, -9.208267402653872],
     ] as LatLngTuple[], // Entrance locations
     rooms: [
       { name: 'Lab 1', location: [38.6626, -9.2075] as LatLngTuple},
@@ -72,6 +71,45 @@ const buildings = [
     ],
   },
   {
+    name: 'Edificio VII',
+    id: 'vii',
+    coordinates: [
+      [38.66077181333206, -9.20621809580918],
+      [38.66077894840998, -9.20528001662725],
+      [38.66019764504653, -9.20528767737553],
+      [38.660158691969414, -9.206249504822447],
+    ] as LatLngTuple[],
+    entrances: [
+      [38.66080427538354, -9.205770652147919],
+  
+    ] as LatLngTuple[], // Entrance locations
+    rooms: [
+      { name: 'Lab 1', location: [38.6626, -9.2075] as LatLngTuple},
+      { name: 'Lab 2', location: [38.6627, -9.2076] as LatLngTuple},
+      { name: 'Conference Room', location: [38.6628, -9.2077] as LatLngTuple},
+    ],
+  },
+
+  /* {
+    name: 'Edificio IX',
+    id: 'ix',
+    coordinates: [
+      [38.66075379017349, -9.207232361835825],
+      [38.660742286862714, -9.206989473333756],
+      [38.65989247211617, -9.206988746408857],
+      [38.659897144903546, -9.207221274523055],
+    ] as LatLngTuple[],
+    entrances: [
+      [38.660268793785335, -9.206967285154748],
+  
+    ] as LatLngTuple[], // Entrance locations
+    rooms: [
+      { name: 'Room 100', location: [38.6626, -9.2075] as LatLngTuple},
+      { name: 'Room 101', location: [38.6627, -9.2076] as LatLngTuple},
+      { name: 'Room 102', location: [38.6628, -9.2077] as LatLngTuple},
+    ],
+  },  */ 
+  /* {
     name: 'Biblioteca',
     id: 'biblioteca',
     coordinates: [
@@ -86,26 +124,7 @@ const buildings = [
     ] as LatLngTuple[], 
     rooms: [
     ],
-  },
-  {
-    name: 'Edificio VII',
-    id: 'vii',
-    coordinates: [
-      [38.66074670138018, -9.2062449690739],
-      [38.66077061166669, -9.205271358185328],
-      [38.66018373090308, -9.205276158085292],
-      [38.66017587964807, -9.206238288032312],
-    ] as LatLngTuple[],
-    entrances: [
-      [38.660753809201665, -9.205809414687383],
-   
-    ] as LatLngTuple[], 
-    rooms: [
-      { name: 'Lab 1', location: [38.6626, -9.2075] as LatLngTuple},
-      { name: 'Lab 2', location: [38.6627, -9.2076] as LatLngTuple},
-      { name: 'Conference Room', location: [38.6628, -9.2077] as LatLngTuple},
-    ],
-  }
+  } */
 ];
 
 export default function Home() {
@@ -119,6 +138,8 @@ export default function Home() {
   const [roomLocation, setRoomLocation] = useState<LatLngTuple | null>(null); // Track room location
 
   const navigate = useNavigate();
+  const [language, setLanguage] = useState(getUserLanguage());
+  
 
   const handlePolygonClick = (name: string) => {
     navigate(`/building/${name}`);
@@ -152,18 +173,6 @@ export default function Home() {
     const building = buildings.find((b) => b.id === selectedBuilding);
     const room = building?.rooms.find((r) => r.name === selectedRoomName);
     setRoomLocation(room?.location || null);
-  };
-
-  const changeLanguage = () => {
-    if (language === 'en') {
-      localStorage.setItem('language', 'pt');
-      languageJson[language] = 'pt';
-      language = 'pt';
-    }else {
-      localStorage.setItem('language', 'en');
-      languageJson[language] = 'en';
-      language = 'en';
-    }
   };
 
   return (
@@ -223,8 +232,8 @@ export default function Home() {
       <FloatingButton onClick={toggleTab} type={"filters"} />
       <FloatingButton onClick={toggleAccount} type={"account"} />
       <FloatingButton onClick={toggleSearch} type={"search"} />
-        
-      <button className={'back-button'} onClick={() => changeLanguage() }>{translations[language].roomInfo.Quality}</button>
+      <FloatingButton onClick={() => {setUserLanguage(); window.location.reload();
+      }} type={"language"} />
 
       {searchClicked && (
         <div className="search-indicator">
@@ -280,13 +289,19 @@ export default function Home() {
       )}
 
       <Drawer isOpen={isTabOpen} onClose={toggleTab}>
-        <div style={{ padding: '20px' }}>
-          <h2>Filters</h2>
-          <p>Put any content you want here, like filters, settings, notifications, etc.</p>
-        </div>
+        <Filters />
       </Drawer>
 
-      {isAccountOpen ?(<LoginRegisterPopup onClose={toggleAccount} />): <></>}
+      {isAccountOpen ? (
+          <div className="login-register-popup">
+            <LoginRegisterPopup onClose={toggleAccount} />
+          </div>
+        ) : null
+      }
+
+      <div className="map-header">
+        <h1>NOVA FCT ROOM SCHEDULER</h1>
+      </div>
     </div>
   );
 }

@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import './Account.css';
-import { getUserToken, getUser, isLoggedIn, clearUserSession } from "../../session/session.js";
+import { getUserToken, getUser, isLoggedIn, clearUserSession, getUserLanguage, setUserLanguage } from "../../session/session.js";
 import { useNavigate } from "react-router-dom";
 import buildingsInfo from '../../storage/buildingsInfo.json';
-
 import translations from '../../storage/translations.json';
-import languageJson from '../../storage/language.json';
-let language = languageJson['language'];
+
+
+
+let language = getUserLanguage();
 let translation = translations[language].account;
 
 const Account = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const navigate = useNavigate();
     
-    console.log(getUser());
-
     const getUserReservations = (buildingsData, username) => { //Get all the reservations for a specific user
         const userReservations = [];
         const allUserReservations = [];
@@ -56,35 +55,68 @@ const Account = () => {
       };
 
 
+      
+      const cancelReservation = (reservationId) => {
+        // Implement the logic to cancel the reservation
+        console.log(`Canceling reservation with ID: ${reservationId}`);
+      Object.entries(buildingsInfo).forEach(([buildingId, building]) => {
+        building.floors.forEach(floor => {
+          floor.rooms.forEach(room => {
+            if (room.reservations && Array.isArray(room.reservations)) {
+        const reservationIndex = room.reservations.findIndex(
+          reservation => reservation.id === reservationId
+        );
+        if (reservationIndex !== -1) {
+          room.reservations.splice(reservationIndex, 1);
+        }
+            }
+          });
+        });
+      });
+      };
+      const confirmCancelReservation = (reservationId) => {
+        if (window.confirm(translation.confirmReservationCancel)) {
+          cancelReservation(reservationId);
+        }
+      };
+
       const ReservationsList = ({ buildingsData }) => {
         const userReservations = getUserReservations(buildingsData, getUser().username);
         console.log(userReservations);
+
+        const isPastReservation = (date) => {
+          const today = new Date().toISOString().split('T')[0];
+          return date < today;
+        };
+
         return (
           <div>
-            <h2>{getUser().username}{translation.userReservations}</h2>
-            {userReservations.length === 0 ? (
-              <p>{translation.messageNoReservations}</p>
-            ) : (
-              <ul>
-                {userReservations.map((item, index) => (
-                  <li key={`${item.date}-${item.time_start}-${index}`}>
-                    <p>
-                    {translation.building} {item.buildingId.toUpperCase()} - {translation.room} {item.roomName}
-                    </p>
-                    <p>
-                    {translation.date}: {item.date}
-                    </p>
-                    <p>
-                      {translation.time}: {item.time_start} - {item.time_end}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+        <h2>{getUser().username}{translation.userReservations}</h2>
+        {userReservations.length === 0 ? (
+          <p>{translation.messageNoReservations}</p>
+        ) : (
+          <ul>
+            {userReservations.map((item, index) => (
+          <li key={`${item.date}-${item.time_start}-${index}`}>
+            <p>
+              {translation.building} {item.buildingId.toUpperCase()} - {translation.room} {item.roomName}
+            </p>
+            <p>
+              {translation.date}: {item.date}
+            </p>
+            <p>
+              {translation.time}: {item.time_start} - {item.time_end}
+            </p>
+            {!isPastReservation(item.date) && (
+              <button onClick={() => confirmCancelReservation(item.id)}>{translation.cancelReservation}</button>
             )}
+          </li>
+            ))}
+          </ul>
+        )}
           </div>
         );
       };
-      
 
       const renderContent = () => {
         if (!isLoggedIn()) {
@@ -125,7 +157,29 @@ const Account = () => {
         }
     }
 
-    
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+    const logoutHandler = () => {
+      setShowLogoutConfirm(true);
+    };
+
+    const confirmLogout = () => {
+      clearUserSession();
+      alert(translation.logoutSuccess);
+      navigate('/');
+    };
+
+    const cancelLogout = () => {
+      setShowLogoutConfirm(false);
+    };
+
+    const LogoutConfirmationBox = () => (
+      <div className="logout-confirmation-box">
+        <p>{translation.logoutMessage}</p>
+        <button onClick={confirmLogout}>{translation.confirmLogout}</button>
+        <button onClick={cancelLogout}>{translation.cancelLogout}</button>
+      </div>
+    );
 
     return (
         <div className="account-container">
@@ -135,11 +189,12 @@ const Account = () => {
                     <li><button onClick={() => setSelectedOption(translation.aboutUser)}>{translation.aboutUser}</button></li>
                     <li><button onClick={() => setSelectedOption(translation.reservations)}>{translation.reservations}</button></li>
                     <li><button onClick={() => navigate('/')}>{translation.back}</button></li>
-                    <li><button onClick={() => {alert(translation.logoutMessage); navigate('/')}}>{translation.logout}</button></li>
+                    <li><button onClick={logoutHandler}>{translation.logout}</button></li>
                 </ul>
             </div>
             <div className="account-content">
-                {renderContent()}
+              {!showLogoutConfirm && renderContent()}
+              {showLogoutConfirm && <LogoutConfirmationBox />}
             </div>
         </div>
     );

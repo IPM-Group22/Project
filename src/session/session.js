@@ -11,9 +11,10 @@ export const setUserSession = (user) => {
         "name": `${user.name}`,
         "email": `${user.email}`,
         "password": `${user.password}`,
-        "token": `${token}`
+        "token": `${token}`,
     }
     Users.users.push(createUser);
+    localStorage.setItem('userLanguage', 'pt');
     localStorage.setItem('userSessionToken', token);
 };
 
@@ -59,3 +60,21 @@ export const deleteUser = (token) => {
     Users.users.splice(index, 1);
     clearUserSession();
 }
+
+// Function to get user language
+export const getUserLanguage = () => {
+    return localStorage.getItem('userLanguage');
+};
+
+// Function to set user language
+export const setUserLanguage = () => {
+    let language = localStorage.getItem('userLanguage');
+    if (language !== 'pt' && language !== 'en') {
+        language = 'pt';
+    }else if (language == 'en'){
+        language = 'pt';
+    }else {
+        language = 'en';
+    }
+    localStorage.setItem('userLanguage', language);
+};

@@ -1,22 +1,19 @@
 import React from 'react';
 import './FiltersDrawer.css';
 
-type DrawerProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+type Drawer = {
+    isOpen: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
 };
 
-const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, children }) => (
-  <div className={`sliding-tab ${isOpen ? 'open' : ''}`}>
-    <div className="sliding-tab-content">
-      <button className="sliding-tab-close-btn" onClick={onClose}>
-        Close
-      </button>
-      {/* Render children passed to the Drawer */}
-      {children}
+const Drawer: React.FC<Drawer> = ({ isOpen, onClose, children }) => (
+    <div className={`sliding-tab ${isOpen ? 'open' : ''}`}>
+        <button className="sliding-tab-close-btn" onClick={onClose}>
+            Close
+        </button>
+        {children}
     </div>
-  </div>
 );
 
 export default Drawer;

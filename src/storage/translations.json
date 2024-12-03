@@ -10,7 +10,8 @@
       "Size": "Size",
       "Quality": "Quality",
       "calendarLocale": "en",
-      "completedReservations": "Completed Reservations",
+      "reservations": "Completed Reservations",
+      "reservationsForDate": "Reservations for the selected date:",
       "date": "Date",
       "timeStart": "Start Time",
       "timeEnd": "End Time",
@@ -21,12 +22,13 @@
       "alertCheck4": "The room is already booked for that time",
       "alertSuccess": "The room was successfully booked for the selected time",
       "buttonBook": "Book",
-      "noReservations": "No reservations for the selected date"
+      "noReservations": "No reservations for the selected date",
+      "ifYouWantToBook": "If you want to book this room, please be logged in"
     },
     "home": {
       "building": "Building",
       "room": "Room"
-    }, 
+    },
     "account":{
       "selectOptionFromTheSidebar": "Select an option from the sidebar",
       "accountPage": "Account Page",
@@ -43,7 +45,13 @@
       "building": "Building",
       "room": "Room",
       "date": "Date",
-      "time": "Time"
+      "time": "Time",
+      "confirmLogout": "Are you sure you want to logout?",
+      "cancelLogout": "Cancel",
+      "logoutSuccess": "Logout successful",
+      "cancelReservation": "Cancel Reservation",
+      "confirmReservationCancel": "Are you sure you want to cancel the reservation?",
+      "reservationCancelled": "Reservation cancelled"
     },
     "loginAndRegister":{
       "usernameOrUsername": "Username or Email",
@@ -62,15 +70,17 @@
       "registrationSuccessful": "Registration successful",
       "userRegistered": "User registered"
     },
-    "buildings":{
-      "buildingName": "Building Name",
-      "building": "Building",
-      "floor": "Floor",
-      "numberOfFloors": "Number of Floors",
-      "imageNotFound": "Image not found",
-      "buildingNotFound": "Building not found"
+    "floatingButton": {
+      "filters": "Filters",
+      "account": "Account",
+      "back": "Back",
+      "home": "Home",
+      "search": "Search",
+      "language": "Language"
     }
   },
+
+
   "pt": {
     "roomInfo": {
       "building": "Edificio",
@@ -82,7 +92,8 @@
       "Size": "Tamanho",
       "Quality": "Qualidade",
       "calendarLocale": "pt-PT",
-      "completedReservations": "Reservas Completas",
+      "reservations": "Reservas Completas",
+      "reservationsForDate": "Reservas para a data selecionada:",
       "date": "Data",
       "timeStart": "Hora de Início",
       "timeEnd": "Hora de Fim",
@@ -93,7 +104,8 @@
       "alertCheck4": "A sala já está reservada para esse horário",
       "alertSuccess": "A sala foi reservada com sucesso para o horário selecionado",
       "buttonBook": "Reservar",
-      "noReservations": "Sem reservas para a data selecionada"
+      "noReservations": "Sem reservas para a data selecionada",
+      "ifYouWantToBook": "Se quiser reservar esta sala, por favor faça login"
     },
     "home": {
       "building": "Building",
@@ -115,7 +127,13 @@
       "building": "Building",
       "room": "Room",
       "date": "Date",
-      "time": "Time"
+      "time": "Time",
+      "confirmLogout": "Tem a certeza que quer sair?",
+      "cancelLogout": "Cancelar",
+      "logoutSuccess": "Logout bem sucedido",
+      "cancelReservation": "Cancelar Reserva",
+      "confirmReservationCancel": "Tem a certeza que quer cancelar a reserva?",
+      "reservationCancelled": "Reserva cancelada"
     },
     "loginAndRegister":{
       "usernameOrUsername": "Username ou Email",
@@ -134,12 +152,13 @@
       "registrationSuccessful": "Registo bem sucedido",
       "userRegistered": "User registered"
     },
-    "building":{
-      "buildingName": "Nome do Edificio",
-      "building": "Edificio",
-      "floor": "Piso",
-      "numberOfFloors": "Número de Pisos",
-      "imageNotFound": "Imagem não encontrada",
-      "buildingNotFound": "Edificio não encontrado"
+    "floatingButton": {
+      "filters": "Filtros",
+      "account": "Conta",
+      "back": "Atrás",
+      "home": "Home",
+      "search": "Pesquisar",
+      "language": "Língua"
+    }
   }
-}}
+}

@@ -4,12 +4,19 @@ import buildingsInfo from '../../storage/buildingsInfo.json';
 import './SearchResults.css';
 import FloatingButton from '../sharedComponents/FloatingButton';
 import LoginRegisterPopup from '../sharedComponents/LoginRegisterPopup';
+import { getUserLanguage, setUserLanguage } from "../../session/session.js";
+
 
 const typeOptions = [
     "building",
     "floor",
     "room"
 ];
+
+interface SearchResultsProps {
+    defaultSearchType?: string;
+    defaultSearchInput?: string;
+}
 
 const SearchResults = () => {
     const location = useLocation();
@@ -83,6 +90,8 @@ const SearchResults = () => {
         <>
             <FloatingButton onClick={() => navigate('/')} type="home" />
             <FloatingButton onClick={toggleAccount} type="account" />
+            <FloatingButton onClick={() => {setUserLanguage(); window.location.reload();
+            }} type={"language"} />
             {isAccountOpen ? <LoginRegisterPopup onClose={toggleAccount} /> : <></>}
             <div className={"header"}>
                 <h1>Search Results</h1>
